@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      THEOS: ${{ github.workspace }}/theos
+      PATH: ${{ github.workspace }}/theos/bin:/usr/local/bin:/usr/bin:/bin
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,18 +18,11 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y build-essential git curl libcurl4-openssl-dev libssl-dev
+          sudo apt install -y build-essential git curl libcurl4-openssl-dev libssl-dev ldid
 
-      - name: Setup Theos
+      - name: Clone Theos
         run: |
-          git clone --recursive https://github.com/theos/theos.git $HOME/theos
-          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
-          echo "PATH=$HOME/theos/bin:$PATH" >> $GITHUB_ENV
-
-      - name: Install iOS toolchain
-        run: |
-          cd $HOME/theos
-          ./bin/install-theos.sh
+          git clone --recursive https://github.com/theos/theos.git ${{ github.workspace }}/theos
 
       - name: Build tweak
         run: |
