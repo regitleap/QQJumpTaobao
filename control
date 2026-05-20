@@ -1,0 +1,9 @@
+Package: com.iosmod.qqjumptb
+Name: QQJumpTaobao
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: QQ点击淘宝链接自动跳转淘宝APP
+Maintainer: user
+Author: user
+Section: Tweaks
+Depends: mobilesubstrate, firmware (>=14.0)
